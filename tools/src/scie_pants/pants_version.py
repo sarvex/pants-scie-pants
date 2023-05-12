@@ -147,7 +147,7 @@ def determine_sha_version(ptex: Ptex, sha: str, find_links_dir: Path) -> Resolve
 def determine_latest_stable_version(
     ptex: Ptex, pants_config: Path, find_links_dir: Path, github_api_bearer_token: str | None = None
 ) -> tuple[Callable[[], None], ResolveInfo]:
-    info(f"Fetching latest stable Pants version since none is configured")
+    info("Fetching latest stable Pants version since none is configured")
     pants_version = ptex.fetch_json("https://pypi.org/pypi/pantsbuild.pants/json")["info"][
         "version"
     ]

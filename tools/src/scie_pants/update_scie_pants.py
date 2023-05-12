@@ -120,8 +120,9 @@ def find_latest_production_release(
             )
             continue
         version = Version(match["version"])
-        release = Release.from_api_response(version, platform, release_data)
-        if release:
+        if release := Release.from_api_response(
+            version, platform, release_data
+        ):
             latest_releases.append(release)
 
     if not latest_releases:

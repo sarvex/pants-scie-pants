@@ -25,9 +25,7 @@ from scie_pants.ptex import Ptex
 def prompt(message: str, default: bool) -> bool:
     raw_answer = input(f"{message} ({'Y/n' if default else 'N/y'}): ")
     answer = raw_answer.strip().lower()
-    if not answer:
-        return default
-    return answer in ("y", "yes")
+    return default if not answer else answer in ("y", "yes")
 
 
 def prompt_for_pants_version(pants_config: Path) -> bool:
@@ -35,7 +33,10 @@ def prompt_for_pants_version(pants_config: Path) -> bool:
         f"The `pants.toml` at {pants_config} has no `pants_version` configured in the `GLOBAL` "
         f"section."
     )
-    return prompt(f"Would you like set `pants_version` to the latest stable release?", default=True)
+    return prompt(
+        "Would you like set `pants_version` to the latest stable release?",
+        default=True,
+    )
 
 
 def prompt_for_pants_config() -> Path | None:
